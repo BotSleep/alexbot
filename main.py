@@ -31,8 +31,16 @@ def save_stats():
 
 def addImageCount(filename):
      # Increment the count for the specified image
+    x, num = getMostCommon()
     counts[filename] = counts.get(filename, 0) + 1
+    if counts[filename] > num:
+        save_stats()
+        return 1
+    elif counts[filename] > num and counts[filename] == 100:
+        save_stats()
+        return 100
     save_stats()
+    return 0
 
 def getMostCommon():
     ties = 0
@@ -40,11 +48,11 @@ def getMostCommon():
     most_common_image = max(counts, key=counts.get)
     most_common_count = counts[most_common_image]
     for k,v in counts.items():
-        if v is most_common_count:
+        if v == most_common_count:
             ties += 1
             tienames.append(os.path.basename(k.split(".")[0]))
             print(f'DEBUG: {os.path.basename(k.split(".")[0])} rolled: {v}')
-    if ties > 0:
+    if ties > 1:
         return tienames, most_common_count
     else:
         return os.path.basename(most_common_image), most_common_count
@@ -70,8 +78,32 @@ async def images(ctx):
                   file.endswith(allowed_extensions)]
     # Choose random image and add path to it
     random_image = f"{script_directory}/images/{random.choice(all_images)}"
-    addImageCount(random_image)
+    tiebreaker = addImageCount(random_image)
     await ctx.send(file=discord.File(random_image))
+    if tiebreaker == 1:
+        await ctx.send(f"{random_image[43:-4]} has taken the lead!")
+    elif tiebreaker == 100:
+        await ctx.send(f"{random_image[43:-4]} WAS THE 100TH ROLL!!!")
+
+@bot.tree.command(name='show', description='Shows a specific character, excluding unrevelead characters', guild=discord.Object(id=240265833199173633))
+@app_commands.describe(name='The characters name')
+async def submit(interaction: discord.Interaction, name: str):
+    if len(name) == 0:
+        await interaction.response.send_message(f'No character name was entered', ephemeral=True)
+    else:
+        closest_score = -1
+        closest_match = None
+        for k in counts.keys():
+            simScore = fuzz.ratio(f"{script_directory}/images/{name}.", k)
+            if simScore > closest_score:
+                closest_score = simScore
+                closest_match = k
+        if counts[closest_match] == 0:
+            await interaction.response.send_message(content="This character has not been revealed! Try using !roll to unlock the ability to view them here.", ephemeral=True)
+        elif closest_score >= 93:
+            await interaction.response.send_message(file=discord.File(f"{script_directory}/images/{closest_match[43:]}"), ephemeral=True)
+        else:
+            await interaction.response.send_message(f'Unable to find character {name}. Check your spelling and try again.', ephemeral=True)
 
 @bot.command(name='toll', help='Pay the trolls toll')
 async def troll(ctx):
@@ -91,21 +123,9 @@ async def stats(ctx, *, arg = 'All'):
                 closest_score = simScore
                 closest_match = k
         if closest_score >= 93:
-            await ctx.send(f'{closest_match} has been rolled {counts[closest_match]} time(s).')
+            await ctx.send(f'{os.path.basename(closest_match[:-4])} has been rolled {counts[closest_match]} time(s).')
         else:
             await ctx.send(f'Unable to find character {arg}. Check your spelling and try again.', ephemeral=True)
-        '''jpg = counts.get(f"{script_directory}/images/{arg}.jpg")
-        png = counts.get(f"{script_directory}/images/{arg}.png")
-        jpeg = counts.get(f"{script_directory}/images/{arg}.jpeg")
-        if jpg != None:
-            await ctx.send(f'{arg} has been rolled {jpg} time(s).')
-        elif png != None:
-            await ctx.send(f'{arg} has been rolled {png} time(s).')
-        elif jpeg != None:
-            await ctx.send(f'{arg} has been rolled {jpeg} time(s).')
-        else:
-            await ctx.send(f'Unable to find character {arg}. Check your spelling/capitalization and try again.', ephemeral=True)
-            '''
     else:
         character, count = getMostCommon()
         if type(character) is list:

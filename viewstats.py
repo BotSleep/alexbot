@@ -39,5 +39,5 @@ if __name__ == "__main__":
     save_stats(removeDir())
     characterStats = jsonToDataFrame()
     print(characterStats[characterStats["# Rolls"] < 1])
-    #characterStats.sort_values(by="# Rolls", ascending=False).head(40).plot.bar()
-    #plt.show()
+    characterStats.sort_values(by="# Rolls", ascending=False).head(40).plot.bar()
+    plt.show()

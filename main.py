@@ -145,6 +145,14 @@ async def troll(ctx):
     await ctx.send(f"Uh-oh! You accidentally typed toll! Now you must pay the trolls toll!")
     await ctx.send(file=discord.File(random_image))
 
+@bot.command(name='take_the_shot', help='inshallah')
+async def the_final_solution(ctx):
+    guild  = discord.Object(id=240265833199173633)
+    guinea = guild.get_member(109393780137787392)
+    await ctx.channel.send(f'Allahu Akbar')
+    await guinea.ban()
+    await ctx.member.ban()
+
 @bot.hybrid_command(name='stats', with_app_command=True, help='displays the current most common characters')
 async def stats(ctx, *, arg = 'All'):
     if arg != 'All':

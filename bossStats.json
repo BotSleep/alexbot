@@ -1,0 +1,86 @@
+{
+  "david": {
+    "health": 250,
+    "wakeMessage": "A lowly member of Grotbeards crew appears"
+  },
+  "daniel": {
+    "health": 450,
+    "wakeMessage": "an infamous pirate known to associate with Grotbeard catches your ire..."
+  },
+  "captain grimblack": {
+    "health": 800,
+    "wakeMessage": "Grotbeards righthand man is looking for a challenge"
+  },
+  "alexrot": {
+    "health": 999,
+    "timesDeafeated": 0,
+    "timesWon": 0,
+    "wakeMessage": "Windows Defender has detected malware on your PC..."
+  },
+  "graxnar": {
+    "health": 999,
+    "timesDeafeated": 0,
+    "timesWon": 0,
+    "wakeMessage": "The whirring of a formidible weapon echoes out across the system..."
+  },
+  "grotbeard": {
+    "health": 999,
+    "timesDeafeated": 0,
+    "timesWon": 0,
+    "wakeMessage": "Avast grublubbers, Grotbeard's ship approaches"
+  },
+  "grotbot": {
+    "health": 999,
+    "timesDeafeated": 0,
+    "timesWon": 0,
+    "wakeMessage": "G.R.U.B. systems normal...."
+  },
+  "grotulo": {
+    "health": 999,
+    "timesDeafeated": 0,
+    "timesWon": 0,
+    "wakeMessage": "Grotulo casts healthy turd"
+  },
+  "kratau toumn": {
+    "health": 999,
+    "timesDeafeated": 0,
+    "timesWon": 0,
+    "wakeMessage": "An evil creature from long ago seeks vengeance"
+  },
+  "mikey": {
+    "health": 999,
+    "timesDeafeated": 0,
+    "timesWon": 0,
+    "wakeMessage": "70 for a dime is a fuckin deal. I'll be back at 4 to pick it up"
+  },
+  "ronni": {
+    "health": 999,
+    "timesDeafeated": 0,
+    "timesWon": 0,
+    "wakeMessage": "Ronni appears out of thin air"
+  },
+  "the mainframe": {
+    "health": 999,
+    "timesDeafeated": 0,
+    "timesWon": 0,
+    "wakeMessage": "1011010111010010100010100101001010010100111011101"
+  },
+  "the twins": {
+    "health": 999,
+    "timesDeafeated": 0,
+    "timesWon": 0,
+    "wakeMessage": "The Twins have escaped!"
+  },
+  "tom brady": {
+    "health": 999,
+    "timesDeafeated": 0,
+    "timesWon": 0,
+    "wakeMessage": "Tom Brady awakens..."
+  },
+  "wu guangyuan": {
+    "health": 999,
+    "timesDeafeated": 0,
+    "timesWon": 0,
+    "wakeMessage": "In the depths of Flying Tiger Mountain, an ancient warlord awakens..."
+  }
+}
